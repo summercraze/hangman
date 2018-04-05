@@ -1,3 +1,7 @@
+/*
+ * This code modify the hangman method 
+ * it read the word from a text file and use it in the game
+ */
 package hangmanFromTxt;
 
 import java.io.FileNotFoundException;
@@ -5,8 +9,10 @@ import java.util.Scanner;
 
 public class hangman 
 {
+	//start a new game if user want to continue
 	public static void main(String[] arges) throws FileNotFoundException
-	   {
+	  {
+		  
 	      boolean newGame = true;
 	      while(newGame == true)
 	      {
@@ -14,15 +20,23 @@ public class hangman
 	      }
 
 	   }
+	
+	   //the actual game that allow user to guess word
 	   public static boolean actualGame() throws FileNotFoundException
 	   {
+		  //get a word from word bank
 	      String currentWord = guessWord();
+	      //replace the word with *
 	      String guess = replaceWord(currentWord);
 //	      System.out.print( "The word to be guessed : " + currentWord  + " ");
+	      
+	      //this count error and check if game 
 	      int error = 0;
 	      boolean gameOver = false;
+	      
 	      while (gameOver==false)
 	      {
+	    	 //allow user to input a character and check if the word is true and continue the game
 	         char letterGuessed = humanInput(guess);
 	         String currentGuess = checkWord(currentWord,guess,letterGuessed);
 	         if(currentGuess.charAt(0)== 'T')
@@ -45,6 +59,8 @@ public class hangman
 	      }
 
 	   }
+	   
+	   //read from a file to get word for word bank
 	   public static String[] wordBank() throws FileNotFoundException
 	   {
 
@@ -63,6 +79,8 @@ public class hangman
 			}
 	      return wordBank;
 	   }
+	   
+	   //get a random word from the word bank
 	   public static String guessWord() throws FileNotFoundException
 	   {
 	      String[] wordBank = wordBank();
@@ -70,6 +88,8 @@ public class hangman
 	      return wordBank[i];
 
 	   }
+	   
+	   //replace all word with * so that user can guess
 	   public static String replaceWord(String word)
 	   {
 	      String guessWord = "";
@@ -79,6 +99,8 @@ public class hangman
 	      }
 	      return guessWord;
 	   }
+	   
+	   //read the input from the user
 	   public static char humanInput(String guess)
 	   {
 	      Scanner input = new Scanner(System.in);
@@ -87,6 +109,9 @@ public class hangman
 
 	      return letter;
 	   }
+	   
+	   //check if the actual word contain the word and if it is replace
+	   //the guess word and return that word
 	   public static String checkWord(String word,String guess,char letter)
 	   {
 
